@@ -24,7 +24,15 @@ Besides that, we'll have a few containers running in the cluster
 
 First, you'll need to have k3s installed and running. The easiest way to do that is to follow the [quickstart guide](https://docs.k3s.io/quick-start).
 
-Once that's all setup, you can run the `setup_cluster.sh` script to get the base configuration running.
+If, while following the above instructions (it's basically just a script to run), you encounter this error:
+
+```
+error: error loading config file "/etc/rancher/k3s/k3s.yaml": open /etc/rancher/k3s/k3s.yaml: permission denied
+```
+
+Follow the steps [here](https://devops.stackexchange.com/a/16044).
+
+Once that's all set up, you can run the `setup_cluster.sh` script to get the base configuration running.
 
 ```sh
 ./scripts/setup_cluster.sh
