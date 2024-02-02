@@ -17,6 +17,12 @@ spec:
         # we're using a locally running container registry, so that's why "localhost:5001"
         # see: start_registry.sh
         image: localhost:5001/flask-webserver:latest
+        volumeMounts:
+        - name: k3s-mount
+          mountPath: /tmp/k3s-data
         ports:
         - containerPort: 8000
-
+      volumes:
+      - name: k3s-mount
+        persistentVolumeClaim:
+          claimName: log-data-claim
