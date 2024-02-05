@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flask-backend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: flask-backend
+  template:
+    metadata:
+      labels:
+        app: flask-backend
+    spec:
+      containers:
+      - name: flask-backend
+        # we're using a locally running container registry, so that's why "localhost:5001"
+        # see: start_registry.sh
+        image: localhost:5001/flask-backend:latest
+        ports:
+        - containerPort: 8005
