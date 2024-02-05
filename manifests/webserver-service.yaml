@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: flask-webserver-service
+  name: flask-webserver
 spec:
   selector:
     app: flask-webserver
