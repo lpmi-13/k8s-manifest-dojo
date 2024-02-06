@@ -22,6 +22,12 @@ spec:
           mountPath: /tmp/k3s-data
         ports:
         - containerPort: 8000
+        env:
+          - name: ENVIRONMENT
+            valueFrom:
+              configMapKeyRef:
+                name: webserver-environment
+                key: environment
       volumes:
       - name: k3s-mount
         persistentVolumeClaim:
