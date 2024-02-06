@@ -6,6 +6,9 @@ import requests
 BACKEND_DNS_NAME = "flask-backend"
 ENVIRONMENT = os.getenv("ENVIRONMENT", default="DEVELOPMENT")
 
+DB_USERNAME = os.getenv("DB_USERNAME", default="testuser")
+DB_PASSWORD = os.getenv("DB_PASSWORD", default="testpassword")
+
 app = Flask(__name__)
 
 @app.route('/')
@@ -21,6 +24,10 @@ def check_datetime():
         return f'Current date and time is: {current_time}, environment is: {ENVIRONMENT} and also {log_data[0]}'
     except Exception as e:
         print(f"received an error: {e}")
+
+@app.route("/creds-test")
+def check_creds():
+    return f'username: {DB_USERNAME}, password: {DB_PASSWORD}'
 
 
 if __name__ == '__main__':
