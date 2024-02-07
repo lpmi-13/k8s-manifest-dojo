@@ -6,7 +6,16 @@ for i in {1..100}; do
   echo "this is log message #${i}" > /tmp/k3s-data/${i}.txt
 done
 
-# we need to set up the data and the persistent volumes first
+# set up the namespace and the roles first
+kubectl apply -f manifests/namespace.yaml
+
+kubectl apply -f manifests/secret-read-role.yaml
+
+kubectl apply -f manifests/webserver-serviceaccount.yaml
+
+kubectl apply -f manifests/webserver-rolebinding.yaml
+
+# we need to set up the data and the persistent volumes before the pods can access them
 kubectl apply -f manifests/webserver-pv.yaml
 
 kubectl apply -f manifests/webserver-pvc.yaml
@@ -17,6 +26,8 @@ kubectl apply -f manifests/database-volumes.yaml
 kubectl apply -f manifests/database-deployment.yaml
 
 kubectl apply -f manifests/database-service.yaml
+
+kubectl apply -f manifests/database-secrets.yaml
 
 # and once the storage is set up, we can actually deploy the pods
 kubectl apply -f manifests/webserver-deployment.yaml

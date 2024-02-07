@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: flask-webserver
+  namespace: dojo
 spec:
   replicas: 1
   selector:
@@ -12,6 +13,7 @@ spec:
       labels:
         app: flask-webserver
     spec:
+      serviceAccountName: flask-webserver-service-account
       containers:
       - name: flask-webserver
         # we're using a locally running container registry, so that's why "localhost:5001"
