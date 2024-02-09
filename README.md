@@ -1,4 +1,4 @@
-# K3s Surprise (working title)
+# K3s Dojo
 
 This is a k3s cluster with configuration to present several common scenarios to debug:
 
@@ -39,3 +39,23 @@ Once that's all set up, you can run the `setup_cluster.sh` script to get the bas
 ```
 
 > run this from the root directory of the project
+
+## Entering the Dojo
+
+The cluster will be started with one problem chosen at random, and you'll need to figure out what it is and how to fix it.
+
+> It's also possible that we'll have a script to randomly trigger an issue, but I haven't worked out how to do that yet, since depending on the resource affected, we might need to manually delete it and recreate it.
+
+Potential issues:
+
+- misconfigured deployment
+- misconfigured ports
+- misconfigured service accounts
+- misconfigured namespaces
+- misconfigured volume constraints
+- misconfigured resource requests and/or limits
+- misconfigured database access
+
+> Most of these will probably cause issues with the pods starting up, so it should be fairly obvious that something's wrong, but I'm going to try and have a bunch of variations to keep it spicy
+
+In theory, there will be a web front end that you can access locally to confirm everything is fine, but that's still to come.
