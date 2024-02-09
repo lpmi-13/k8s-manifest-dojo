@@ -6,7 +6,6 @@ metadata:
 subjects:
 - kind: ServiceAccount
   name: flask-webserver-service-account
-  namespace: dojo
 roleRef:
   kind: Role
   name: webserver-secret-reader
