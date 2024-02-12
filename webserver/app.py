@@ -3,7 +3,7 @@ import os
 import requests
 
 # we can just use the name of the service, due to DNS record creation on service creation
-BACKEND_DNS_NAME = "logs-processor"
+LOG_PROCESSOR_DNS_NAME = "logs-processor"
 ENVIRONMENT = os.getenv("ENVIRONMENT", default="DEVELOPMENT")
 
 DB_USERNAME = os.getenv("DB_USERNAME", default="testuser")
@@ -16,7 +16,7 @@ app = Flask(__name__)
 def log_info():
 
     try:
-        response = requests.get(f"http://{BACKEND_DNS_NAME}/log-count")
+        response = requests.get(f"http://{LOG_PROCESSOR_DNS_NAME}/log-count")
         log_count = response.json()["log_count"]
         print(f"received a total log count of: {log_count}")
 
