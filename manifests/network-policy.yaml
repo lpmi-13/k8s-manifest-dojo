@@ -6,7 +6,7 @@ metadata:
 spec:
   podSelector:
     matchLabels:
-      app: flask-backend
+      app: logs-processor
   policyTypes:
   - Ingress
   ingress:

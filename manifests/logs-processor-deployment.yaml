@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: logs-processor
+  namespace: dojo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: logs-processor
+  template:
+    metadata:
+      labels:
+        app: logs-processor
+    spec:
+      containers:
+      - name: logs-processor
+        # we're using a locally running container registry, so that's why "localhost:5001"
+        # see: start_registry.sh
+        image: localhost:5001/logs-processor:latest
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "250m"
+          limits:
+            memory: "256Mi"
+            cpu: "500m"
+        volumeMounts:
+        - name: k3s-mount
+          mountPath: /tmp/k3s-data
+        ports:
+        - containerPort: 8005
+        livenessProbe:
+          httpGet:
+            path: /log-count
+            port: 8005
+          # the app needs to do some processing before it's ready
+          initialDelaySeconds: 30 
+          timeoutSeconds: 5 
+          periodSeconds: 10
+          failureThreshold: 3
+        env:
+          - name: ENVIRONMENT
+            valueFrom:
+              configMapKeyRef:
+                name: environment
+                key: environment
+      volumes:
+      - name: k3s-mount
+        persistentVolumeClaim:
+          claimName: log-data-claim

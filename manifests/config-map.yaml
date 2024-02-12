@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: webserver-environment
+  name: environment
   namespace: dojo
 data:
   environment: "STAGING"
