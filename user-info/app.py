@@ -1,10 +1,12 @@
 from flask import Flask
+from flask import jsonify
 from flask_sqlalchemy import SQLAlchemy
 import os
 
 ENVIRONMENT = os.getenv("ENVIRONMENT", default="DEVELOPMENT")
 
-DB_DNS_NAME = "localhost" if ENVIRONMENT.lower() == "development" else "postgres"
+# see note about different port for local container database re: non-standard port
+DB_DNS_NAME = "localhost:6432" if ENVIRONMENT.lower() == "development" else "postgres"
 DATABASE_NAME = "users"
 
 DB_USERNAME = os.getenv("DB_USERNAME", default="postgres")
@@ -26,12 +28,12 @@ class Users(db.Model):
 
 
 @app.route("/")
-def connected_to_database():
-    return "connected to the database"
+def default_route():
+    return "ready to serve info about users"
 
 
 @app.route("/users")
-def log_count():
+def get_users():
     users = Users.query.all()
     user_list = []
     for user in users:
@@ -39,6 +41,14 @@ def log_count():
             {"id": user.id, "username": user.username, "email": user.email}
         )
     return user_list
+
+
+@app.route("/user/<int:user_id>")
+def get_user_by_id(user_id):
+    user = Users.query.get(user_id)
+    if user is None:
+        return jsonify({"error": f"no users found with id: {user_id}"})
+    return jsonify({"id": user.id, "username": user.username, "email": user.email})
 
 
 if __name__ == "__main__":
