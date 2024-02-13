@@ -5,6 +5,7 @@ This is a k3s cluster with configuration to present several common scenarios to 
 - DNS issues
 - Liveness/Readiness probe issues
 - ResourceLimit issues
+- RBAC access to secrets issues
 
 The actual problem will be chosen on startup of the applications, and you'll see there's an issue by querying pod status or looking in logs.
 
@@ -17,12 +18,14 @@ Because k3s runs with containerd, we can't just run locally built images, so we 
 Besides that, we'll have a few containers running in the cluster
 
 - a flask webserver
-- ...
-- ...
+- a server to deal with logs-processing (a bit contrived, but useful for local volume mounts)
+- a server to interact with a database table about users
 
 ## Running locally (the whole point)
 
 First, you'll need to have k3s installed and running. The easiest way to do that is to follow the [quickstart guide](https://docs.k3s.io/quick-start).
+
+You'll also need `python` and the `psql` command line utility installed.
 
 If, while following the above instructions (it's basically just a script to run), you encounter this error:
 
