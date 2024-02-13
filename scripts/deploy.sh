@@ -2,9 +2,7 @@ if ! [ -d "/tmp/k3s-data" ]; then
   mkdir /tmp/k3s-data
 fi
 
-for i in {1..100}; do
-  echo "this is log message #${i}" > /tmp/k3s-data/${i}.txt
-done
+python3 ./scripts/data_generator.py
 
 # set up the namespace and the roles first
 kubectl apply -f manifests/namespace.yaml
@@ -43,6 +41,16 @@ kubectl apply -f manifests/user-info-deployment.yaml
 kubectl apply -f manifests/user-info-service.yaml
 
 # we probably also need some network policies and config maps
-kubectl apply -f manifests/network-policy.yaml
+kubectl apply -f manifests/network-policy-user-info.yaml
+kubectl apply -f manifests/network-policy-logs-processor.yaml
+kubectl apply -f manifests/network-policy-database.yaml
 
 kubectl apply -f manifests/config-map.yaml
+
+# and let's also set up the data in the postgres database so the user-info
+# service can query it
+
+echo "waiting 5 seconds for database to be ready..."
+sleep 5
+
+./scripts/setup_cluster_database.sh
