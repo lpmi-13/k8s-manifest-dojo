@@ -38,6 +38,10 @@ kubectl apply -f manifests/logs-processor-deployment.yaml
 
 kubectl apply -f manifests/logs-processor-service.yaml
 
+kubectl apply -f manifests/user-info-deployment.yaml
+
+kubectl apply -f manifests/user-info-service.yaml
+
 # we probably also need some network policies and config maps
 kubectl apply -f manifests/network-policy.yaml
 

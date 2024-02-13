@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: user-info
+  namespace: dojo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: user-info
+  template:
+    metadata:
+      labels:
+        app: user-info
+    spec:
+      containers:
+      - name: user-info
+        # we're using a locally running container registry, so that's why "localhost:5001"
+        # see: start_registry.sh
+        image: localhost:5001/user-info:latest
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "250m"
+          limits:
+            memory: "256Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 8010
+        env:
+          - name: ENVIRONMENT
+            valueFrom:
+              configMapKeyRef:
+                name: environment
+                key: environment
