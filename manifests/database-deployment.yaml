@@ -20,8 +20,11 @@ spec:
           ports:
             - containerPort: 5432
           env:
+          # just a reminder that if you change these after the stateful set has been initialized,
+          # you'll need to delete and recreate the folder for the persistent volume mount
+          # eg, /tmp/k3s-database-data
             - name: POSTGRES_USER
-              value: postgres-prod
+              value: prod-user
             - name: POSTGRES_PASSWORD
               value: supersecretproductionpassword
           volumeMounts:

@@ -13,6 +13,7 @@ spec:
       labels:
         app: user-info
     spec:
+      serviceAccountName: flask-webserver-service-account
       containers:
       - name: user-info
         # we're using a locally running container registry, so that's why "localhost:5001"
@@ -23,7 +24,7 @@ spec:
             memory: "128Mi"
             cpu: "250m"
           limits:
-            memory: "256Mi"
+            memory: "512Mi"
             cpu: "500m"
         ports:
         - containerPort: 8010
@@ -33,3 +34,13 @@ spec:
               configMapKeyRef:
                 name: environment
                 key: environment
+          - name: DB_USERNAME
+            valueFrom:
+              secretKeyRef:
+                name: db-credentials
+                key: username
+          - name: DB_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: db-credentials
+                key: password
