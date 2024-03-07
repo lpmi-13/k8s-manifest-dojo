@@ -9,5 +9,5 @@ done
 
 # get rid of all the resources related to prometheus and grafana
 for resource in configmap deploy svc; do
-  kubectl delete $resource -n monitoring;
+  kubectl delete $resource -n monitoring --all;
 done
