@@ -54,3 +54,6 @@ echo "waiting 5 seconds for database to be ready..."
 sleep 5
 
 ./scripts/setup_cluster_database.sh
+
+# and lastly, we add the monitoring stack
+kubectl apply -f manifests/monitoring
