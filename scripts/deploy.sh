@@ -55,5 +55,9 @@ sleep 5
 
 ./scripts/setup_cluster_database.sh
 
-# and lastly, we add the monitoring stack
+# and now we add the monitoring stack
 kubectl apply -f manifests/monitoring
+
+# followed by prometheus and grafana
+kubectl apply -f manifests/prometheus
+kubectl apply -f manifests/grafana

@@ -4,5 +4,10 @@ done
 
 # also tear down the monitoring stack
 for resource in svc deploy sa clusterrole clusterrolebinding; do
-  kubectl delete $resource -n kube-system kube-state-metrics
+  kubectl delete $resource -n kube-system kube-state-metrics;
+done
+
+# get rid of all the resources related to prometheus and grafana
+for resource in configmap deploy svc; do
+  kubectl delete $resource -n monitoring;
 done
