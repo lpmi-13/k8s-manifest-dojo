@@ -62,3 +62,7 @@ Potential issues:
 > Most of these will probably cause issues with the pods starting up, so it should be fairly obvious that something's wrong, but I'm going to try and have a bunch of variations to keep it spicy
 
 In theory, there will be a web front end that you can access locally to confirm everything is fine, but that's still to come.
+
+## Resetting the cluster
+
+If, for any reason, you want to reset everything, you can run the k3s "kill all" script at `/usr/local/bin/k3s-killall.sh` (the k3s installer should put it into the `$PATH`). After that, to bring the cluster back up, you can run `sudo systemctl restart k3s`.
