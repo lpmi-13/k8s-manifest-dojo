@@ -13,7 +13,7 @@ spec:
       labels:
         app: flask-webserver
     spec:
-      serviceAccountName: flask-webserver-service-account
+      serviceAccountName: SERVICE_ACCOUNT_NAME
       containers:
       - name: flask-webserver
         # we're using a locally running container registry, so that's why "localhost:5001"
