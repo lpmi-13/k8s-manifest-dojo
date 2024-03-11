@@ -10,6 +10,11 @@ CONFIGURATION = {
         "good": "5432",
         "bad": "4321",
     },
+    "network-policy-database.yaml": {
+        "replace": "INGRESS_FROM_POD",
+        "good": "user-info",
+        "bad": "user-service",
+    },
     "webserver-deployment.yaml": {
         "replace": "SERVICE_ACCOUNT_NAME",
         "good": "flask-webserver-service-account",

@@ -13,4 +13,4 @@ spec:
   - from:
     - podSelector:
         matchLabels:
-          app: user-info
+          app: INGRESS_FROM_POD
