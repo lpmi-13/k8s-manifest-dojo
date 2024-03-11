@@ -15,6 +15,11 @@ CONFIGURATION = {
         "good": "flask-webserver-service-account",
         "bad": "flask-webserver-service-account-no-access",
     },
+    "webserver-serviceaccount.yaml": {
+        "replace": "SECRET_NAME",
+        "good": "db-credentials",
+        "bad": "secret-credentials",
+    },
 }
 
 FILES_TO_CONFIGURE = [file_name for file_name in CONFIGURATION]
