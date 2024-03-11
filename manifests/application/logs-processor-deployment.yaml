@@ -35,7 +35,7 @@ spec:
             path: /log-count
             port: 8005
           # the app needs to do some processing before it's ready
-          initialDelaySeconds: 30 
+          initialDelaySeconds: DELAY_IN_SECONDS
           timeoutSeconds: 5 
           periodSeconds: 10
           failureThreshold: 3

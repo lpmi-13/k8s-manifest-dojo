@@ -10,6 +10,11 @@ CONFIGURATION = {
         "good": "5432",
         "bad": "4321",
     },
+    "logs-processor-deployment.yaml": {
+        "replace": "DELAY_IN_SECONDS",
+        "good": "30",
+        "bad": "1",
+    },
     "network-policy-database.yaml": {
         "replace": "INGRESS_FROM_POD",
         "good": "user-info",
