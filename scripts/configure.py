@@ -2,7 +2,7 @@
 import random
 import os
 
-DIRECTORY_PATH = "./manifests/"
+DIRECTORY_PATH = "./manifests/application/"
 
 CONFIGURATION = {
     "database-service.yaml": {
