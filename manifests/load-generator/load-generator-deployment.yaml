@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: load-generator
+  namespace: load
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: load-generator
+  template:
+    metadata:
+      labels:
+        app: load-generator
+    spec:
+      containers:
+      - name: load-generator
+        # we're using a locally running container registry, so that's why "localhost:5001"
+        # see: start_registry.sh
+        image: localhost:5001/load-generator:latest
+        # we use the DNS for the webserver service here to generate some background load on the cluster
+        command: ["/load-generator", "http://flask-webserver.dojo", "5"]
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "250m"
+          limits:
+            memory: "256Mi"
+            cpu: "500m"

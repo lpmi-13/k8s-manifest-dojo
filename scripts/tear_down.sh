@@ -11,3 +11,6 @@ done
 for resource in configmap deploy svc; do
   kubectl delete $resource -n monitoring --all;
 done
+
+# remove the load-generator pods
+kubectl delete deploy -n load

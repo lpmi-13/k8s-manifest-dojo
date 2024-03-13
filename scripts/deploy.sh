@@ -61,3 +61,6 @@ kubectl apply -f manifests/kube-state-metrics
 # followed by prometheus and grafana
 kubectl apply -f manifests/prometheus
 kubectl apply -f manifests/grafana
+
+# and lastly, let's add some background load to the cluster
+kubectl apply -f manifests/load-generator

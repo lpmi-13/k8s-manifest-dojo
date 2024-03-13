@@ -13,3 +13,12 @@ metadata:
   name: monitoring
   labels:
     name: monitoring
+
+---
+
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: load
+  labels:
+    name: load
