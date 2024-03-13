@@ -19,7 +19,7 @@ spec:
         # see: start_registry.sh
         image: localhost:5001/load-generator:latest
         # we use the DNS for the webserver service here to generate some background load on the cluster
-        command: ["/load-generator", "http://flask-webserver.dojo", "5"]
+        command: ["/load-generator", "http://flask-webserver.dojo", "10"]
         resources:
           requests:
             memory: "128Mi"
