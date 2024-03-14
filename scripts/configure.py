@@ -67,6 +67,13 @@ CONFIGURATION = {
             "bad": "1m",
         },
     ],
+    "user-info-service.yaml": [
+        {
+            "replace": "TARGET_PORT",
+            "good": "8010",
+            "bad": "8011",
+        },
+    ],
     "webserver-deployment.yaml": [
         {
             "replace": "SERVICE_ACCOUNT_NAME",
