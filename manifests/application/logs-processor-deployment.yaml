@@ -36,9 +36,9 @@ spec:
             port: 8005
           # the app needs to do some processing before it's ready
           initialDelaySeconds: DELAY_IN_SECONDS
-          timeoutSeconds: 5 
-          periodSeconds: 10
-          failureThreshold: 3
+          timeoutSeconds: TIMEOUT_IN_SECONDS
+          periodSeconds: PERIOD_IN_SECONDS
+          failureThreshold: FAILURE_THRESHOLD
         env:
           - name: ENVIRONMENT
             valueFrom:

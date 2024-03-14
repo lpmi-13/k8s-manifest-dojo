@@ -12,12 +12,28 @@ CONFIGURATION = {
             "bad": "4321",
         }
     ],
-    # comment this out for now because the behavior seems a bit flaky and non-deterministic
-    # "logs-processor-deployment.yaml": {
-    # "replace": "DELAY_IN_SECONDS",
-    # "good": "30",
-    # "bad": "1",
-    # },
+    "logs-processor-deployment.yaml": [
+        {
+            "replace": "DELAY_IN_SECONDS",
+            "good": "30",
+            "bad": "1",
+        },
+        {
+            "replace": "TIMEOUT_IN_SECONDS",
+            "good": "5",
+            "bad": "1",
+        },
+        {
+            "replace": "PERIOD_IN_SECONDS",
+            "good": "10",
+            "bad": "1",
+        },
+        {
+            "replace": "FAILURE_THRESHOLD",
+            "good": "3",
+            "bad": "1",
+        },
+    ],
     "network-policy-database.yaml": [
         {
             "replace": "INGRESS_FROM_POD",
