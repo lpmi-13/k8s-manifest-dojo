@@ -19,6 +19,13 @@ CONFIGURATION = {
             "bad": "dGhpc2lzbm90dGhlcGFzc3dvcmR5b3VyZWxvb2tpbmdmb3I=",
         },
     ],
+    "database-service.yaml": [
+        {
+            "replace": "NAMESPACE",
+            "good": "dojo",
+            "bad": "database",
+        },
+    ],
     "logs-processor-deployment.yaml": [
         {
             "replace": "DELAY_IN_SECONDS",
