@@ -20,12 +20,13 @@ Besides that, we'll have a few containers running in the cluster
 - a flask webserver
 - a server to deal with logs-processing (a bit contrived, but useful for local volume mounts)
 - a server to interact with a database table about users
+- a load generator making requests to the flask webserver that trigger downstream queries to the other services
 
 ## Running locally (the whole point)
 
 First, you'll need to have k3s installed and running. The easiest way to do that is to follow the [quickstart guide](https://docs.k3s.io/quick-start).
 
-You'll also need `python` and the `psql` command line utility installed.
+You'll also need `python3` installed.
 
 If, while following the above instructions (it's basically just a script to run), you encounter this error:
 
@@ -61,7 +62,27 @@ Potential issues:
 
 > Most of these will probably cause issues with the pods starting up, so it should be fairly obvious that something's wrong, but I'm going to try and have a bunch of variations to keep it spicy
 
-In theory, there will be a web front end that you can access locally to confirm everything is fine, but that's still to come.
+You should be able to visit the grafana dashboard to see if something's up. You can see what IP to use to access the dashboard via:
+
+```sh
+kubectl -n monitoring get svc
+```
+
+You'll see something like this:
+
+```sh
+NAME                 TYPE       CLUSTER-IP     EXTERNAL-IP   PORT(S)          AGE
+prometheus-service   NodePort   10.43.1.191    <none>        8080:30000/TCP   6m47s
+grafana              NodePort   10.43.213.62   <none>        3000:32000/TCP   6m47s
+```
+
+And so you can access `http://10.43.213.62:3000` in the browser to go to the dashboard. The default admin username and password, respectively, are "admin" and "admin".
+
+...you can also just see what pods are running via:
+
+```sh
+kubectl -n dojo get po
+```
 
 ## Resetting the cluster
 
