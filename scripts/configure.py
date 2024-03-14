@@ -12,6 +12,13 @@ CONFIGURATION = {
             "bad": "4321",
         }
     ],
+    "database-secrets.yaml": [
+        {
+            "replace": "DATABASE_SECRET",
+            "good": "c3VwZXJzZWNyZXRwcm9kdWN0aW9ucGFzc3dvcmQ=",
+            "bad": "dGhpc2lzbm90dGhlcGFzc3dvcmR5b3VyZWxvb2tpbmdmb3I=",
+        },
+    ],
     "logs-processor-deployment.yaml": [
         {
             "replace": "DELAY_IN_SECONDS",
