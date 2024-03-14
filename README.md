@@ -26,7 +26,7 @@ Besides that, we'll have a few containers running in the cluster
 
 First, you'll need to have k3s installed and running. The easiest way to do that is to follow the [quickstart guide](https://docs.k3s.io/quick-start).
 
-You'll also need `python3` installed.
+You'll also need `python3` and the `docker` cli installed.
 
 If, while following the above instructions (it's basically just a script to run), you encounter this error:
 
