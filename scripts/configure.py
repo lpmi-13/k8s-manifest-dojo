@@ -10,15 +10,26 @@ CONFIGURATION = {
         "good": "5432",
         "bad": "4321",
     },
-    "logs-processor-deployment.yaml": {
-        "replace": "DELAY_IN_SECONDS",
-        "good": "30",
-        "bad": "1",
-    },
+    # comment this out for now because the behavior seems a bit flaky and non-deterministic
+    # "logs-processor-deployment.yaml": {
+    # "replace": "DELAY_IN_SECONDS",
+    # "good": "30",
+    # "bad": "1",
+    # },
     "network-policy-database.yaml": {
         "replace": "INGRESS_FROM_POD",
         "good": "user-info",
         "bad": "user-service",
+    },
+    "user-info.deployment.yaml": {
+        "replace": "MEMORY_LIMIT",
+        "good": "512Mi",
+        "bad": "1Mi",
+    },
+    "user-info.deployment.yaml": {
+        "replace": "CPU_LIMIT",
+        "good": "500m",
+        "bad": "1m",
     },
     "webserver-deployment.yaml": {
         "replace": "SERVICE_ACCOUNT_NAME",
