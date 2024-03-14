@@ -5,7 +5,7 @@ import os
 DIRECTORY_PATH = "./manifests/application/"
 
 CONFIGURATION = {
-    "database-service.yaml": [
+    "database-deployment.yaml": [
         {
             "replace": "DATABASE_PORT",
             "good": "5432",
