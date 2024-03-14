@@ -34,6 +34,13 @@ CONFIGURATION = {
             "bad": "1",
         },
     ],
+    "logs-processor-pv.yaml": [
+        {
+            "replace": "STORAGE_CAPACITY",
+            "good": "1Gi",
+            "bad": "0.01Mi",
+        },
+    ],
     "network-policy-database.yaml": [
         {
             "replace": "INGRESS_FROM_POD",
