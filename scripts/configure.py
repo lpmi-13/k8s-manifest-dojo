@@ -23,7 +23,7 @@ CONFIGURATION = {
         {
             "replace": "NAMESPACE",
             "good": "dojo",
-            "bad": "database",
+            "bad": "monitoring",
         },
     ],
     "logs-processor-deployment.yaml": [
