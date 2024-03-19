@@ -12,11 +12,9 @@ for resource in configmap deploy ds svc; do
   kubectl delete $resource -n monitoring --all;
 done
 
-for resource in clusterrole clusterrolebinding; do
+for resource in sa clusterrolebinding; do
   kubectl delete $resource -n monitoring prometheus-scraper;
 done
-
-kubectl delete sa -n monitoring prometheus-scraper
 
 # remove the load-generator pods
 kubectl delete deploy -n load --all
