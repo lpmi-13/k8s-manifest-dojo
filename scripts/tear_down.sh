@@ -8,9 +8,15 @@ for resource in svc deploy sa clusterrole clusterrolebinding; do
 done
 
 # get rid of all the resources related to prometheus and grafana
-for resource in configmap deploy svc; do
+for resource in configmap deploy ds svc; do
   kubectl delete $resource -n monitoring --all;
 done
+
+for resource in clusterrole clusterrolebinding; do
+  kubectl delete $resource -n monitoring prometheus-scraper;
+done
+
+kubectl delete sa -n monitoring prometheus-scraper
 
 # remove the load-generator pods
 kubectl delete deploy -n load --all

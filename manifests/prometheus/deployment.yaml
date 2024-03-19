@@ -15,6 +15,7 @@ spec:
       labels:
         app: prometheus-server
     spec:
+      serviceAccountName: prometheus-scraper
       containers:
         - name: prometheus
           image: prom/prometheus

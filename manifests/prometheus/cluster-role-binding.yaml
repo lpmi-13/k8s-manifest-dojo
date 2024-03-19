@@ -1,0 +1,13 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: prometheus-scraper
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  # we need this to be able to get the cadvisor metrics
+  name: cluster-admin
+subjects:
+- kind: ServiceAccount
+  name: prometheus-scraper
+  namespace: monitoring
