@@ -55,6 +55,13 @@ CONFIGURATION = {
             "bad": "user-service",
         }
     ],
+    "network-policy-logs-processor.yaml": [
+        {
+            "replace": "INGRESS_FROM_POD",
+            "good": "flask-webserver",
+            "bad": "webserver",
+        }
+    ],
     "user-info-deployment.yaml": [
         {
             "replace": "MEMORY_LIMIT",
