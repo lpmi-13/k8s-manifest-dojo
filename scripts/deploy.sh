@@ -9,9 +9,9 @@ kubectl apply -f manifests/application/namespace.yaml
 
 kubectl apply -f manifests/application/secret-read-role.yaml
 
-kubectl apply -f manifests/application/webserver-serviceaccount.yaml
+kubectl apply -f manifests/application/user-info-serviceaccount.yaml
 
-kubectl apply -f manifests/application/webserver-rolebinding.yaml
+kubectl apply -f manifests/application/user-info-rolebinding.yaml
 
 # we need to set up the data and the persistent volumes before the pods can access them
 kubectl apply -f manifests/application/logs-processor-pv.yaml

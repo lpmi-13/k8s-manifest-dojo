@@ -91,19 +91,19 @@ CONFIGURATION = {
             "bad": "8011",
         },
     ],
-    "webserver-deployment.yaml": [
-        {
-            "replace": "SERVICE_ACCOUNT_NAME",
-            "good": "flask-webserver-service-account",
-            "bad": "flask-webserver-service-account-no-access",
-        }
-    ],
-    "webserver-serviceaccount.yaml": [
+    "user-info-serviceaccount.yaml": [
         {
             "replace": "SECRET_NAME",
             "good": "db-credentials",
             "bad": "secret-credentials",
         }
+    ],
+    "webserver-service.yaml": [
+        {
+            "replace": "TARGET_PORT",
+            "good": "8000",
+            "bad": "8008",
+        },
     ],
 }
 

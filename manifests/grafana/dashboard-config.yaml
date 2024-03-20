@@ -2847,7 +2847,7 @@ data:
         "type": "timeseries"
       }
     ],
-    "refresh": "30s",
+    "refresh": "5s",
     "schemaVersion": 39,
     "tags": [
       "Kubernetes",
@@ -5070,7 +5070,7 @@ data:
         "type": "timeseries"
       }
     ],
-    "refresh": "30s",
+    "refresh": "5s",
     "schemaVersion": 39,
     "tags": [
       "Kubernetes",
