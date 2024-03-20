@@ -1,6 +1,7 @@
 from flask import Flask
 import json
 import os
+import sys
 
 LOGS_DIRECTORY = "/tmp/k3s-data/"
 ENVIRONMENT = os.getenv("ENVIRONMENT", default="DEVELOPMENT")
@@ -39,8 +40,14 @@ LOGS_FOR_ENVIRONMENT = list(
 
 @app.route("/log-count")
 def log_count():
-    response = {"log_count": len(LOGS_FOR_ENVIRONMENT), "environment": ENVIRONMENT}
-    return json.dumps(response)
+    try:
+        response = {"log_count": len(LOGS_FOR_ENVIRONMENT), "environment": ENVIRONMENT}
+        return json.dumps(response)
+
+    except Exception as e:
+        print(f"received an error: {e}")
+        # forces the error to stop the gunicorn process, making it more obvious
+        sys.exit(4)
 
 
 if __name__ == "__main__":

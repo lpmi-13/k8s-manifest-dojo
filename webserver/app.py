@@ -1,5 +1,6 @@
 from flask import Flask
 import os
+import sys
 import requests
 
 # we can just use the name of the services, due to DNS record creation on service creation
@@ -27,6 +28,8 @@ def log_info():
         return f"environment is: {ENVIRONMENT}, and we have {log_count} total log lines"
     except Exception as e:
         print(f"received an error: {e}")
+        # forces the error to stop the gunicorn process, making it more obvious
+        sys.exit(4)
 
 
 @app.route("/all_users")
@@ -38,6 +41,8 @@ def all_users():
         return {"all_users": users}
     except Exception as e:
         print(f"received an error: {e}")
+        # forces the error to stop the gunicorn process, making it more obvious
+        sys.exit(4)
 
 
 @app.route("/user/<int:user_id>")
@@ -49,6 +54,8 @@ def get_user_by_id(user_id):
         return {"user": user}
     except Exception as e:
         print(f"received an error: {e}")
+        # forces the error to stop the gunicorn process, making it more obvious
+        sys.exit(4)
 
 
 if __name__ == "__main__":

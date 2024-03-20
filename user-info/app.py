@@ -2,6 +2,7 @@ from flask import Flask
 from flask import jsonify
 from flask_sqlalchemy import SQLAlchemy
 import os
+import sys
 
 ENVIRONMENT = os.getenv("ENVIRONMENT", default="DEVELOPMENT")
 
@@ -34,21 +35,32 @@ def default_route():
 
 @app.route("/users")
 def get_users():
-    users = Users.query.all()
-    user_list = []
-    for user in users:
-        user_list.append(
-            {"id": user.id, "username": user.username, "email": user.email}
-        )
-    return user_list
+    try:
+        users = Users.query.all()
+        user_list = []
+        for user in users:
+            user_list.append(
+                {"id": user.id, "username": user.username, "email": user.email}
+            )
+        return user_list
+
+    except Exception as e:
+        print(f"received an error: {e}")
+        # forces the error to stop the gunicorn process, making it more obvious
+        sys.exit(4)
 
 
 @app.route("/user/<int:user_id>")
 def get_user_by_id(user_id):
-    user = Users.query.get(user_id)
-    if user is None:
-        return jsonify({"error": f"no users found with id: {user_id}"})
-    return jsonify({"id": user.id, "username": user.username, "email": user.email})
+    try:
+        user = Users.query.get(user_id)
+        if user is None:
+            return jsonify({"error": f"no users found with id: {user_id}"})
+        return jsonify({"id": user.id, "username": user.username, "email": user.email})
+    except Exception as e:
+        print(f"received an error: {e}")
+        # forces the error to stop the gunicorn process, making it more obvious
+        sys.exit(4)
 
 
 if __name__ == "__main__":
