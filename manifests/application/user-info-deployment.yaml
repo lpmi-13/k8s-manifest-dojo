@@ -21,8 +21,8 @@ spec:
         image: localhost:5001/user-info:latest
         resources:
           requests:
-            memory: "128Mi"
-            cpu: "250m"
+            memory: MEMORY_REQUEST
+            cpu: CPU_REQUEST
           limits:
             memory: MEMORY_LIMIT
             cpu: CPU_LIMIT

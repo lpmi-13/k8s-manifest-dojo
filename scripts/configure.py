@@ -64,6 +64,16 @@ CONFIGURATION = {
     ],
     "user-info-deployment.yaml": [
         {
+            "replace": "MEMORY_REQUEST",
+            "good": "128Mi",
+            "bad": "1Mi",
+        },
+        {
+            "replace": "CPU_REQUEST",
+            "good": "250m",
+            "bad": "1m",
+        },
+        {
             "replace": "MEMORY_LIMIT",
             "good": "512Mi",
             "bad": "1Mi",
