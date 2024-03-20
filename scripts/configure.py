@@ -98,11 +98,11 @@ CONFIGURATION = {
             "bad": "secret-credentials",
         }
     ],
-    "webserver-service.yaml": [
+    "webserver-deployment.yaml": [
         {
-            "replace": "TARGET_PORT",
-            "good": "8000",
-            "bad": "8008",
+            "replace": "APPLICATION_IMAGE",
+            "good": "flask-webserver",
+            "bad": "webserver",
         },
     ],
 }

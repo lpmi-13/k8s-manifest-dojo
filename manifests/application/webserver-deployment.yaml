@@ -17,7 +17,7 @@ spec:
       - name: flask-webserver
         # we're using a locally running container registry, so that's why "localhost:5001"
         # see: start_registry.sh
-        image: localhost:5001/flask-webserver:latest
+        image: localhost:5001/APPLICATION_IMAGE:latest
         ports:
         - containerPort: 8000
         env:
