@@ -1,0 +1,2 @@
+# this is the directory we create the broken configuration in, so we put it into .gitignore so we can't easily see with `git diff` what the changes were.
+manifests/application
