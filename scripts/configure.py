@@ -48,6 +48,13 @@ CONFIGURATION = {
             "bad": "0.01Mi",
         },
     ],
+    "logs-processor-service.yaml": [
+        {
+            "replace": "TARGET_PORT",
+            "good": "8005",
+            "bad": "8015",
+        },
+    ],
     "network-policy-database.yaml": [
         {
             "replace": "INGRESS_FROM_POD",

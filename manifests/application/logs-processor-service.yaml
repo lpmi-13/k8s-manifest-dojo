@@ -9,5 +9,5 @@ spec:
   ports:
     - protocol: TCP
       port: 80
-      targetPort: 8005
+      targetPort: TARGET_PORT
   type: ClusterIP
