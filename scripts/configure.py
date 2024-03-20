@@ -120,7 +120,7 @@ def replace_line_in_file(file_name, misconfigure=False):
                     word_to_replace,
                     replacement,
                 )
-                contents += temp_contents + "\n"
+                contents += f"{temp_contents}\n"
 
         with open(os.path.join(DIRECTORY_PATH, file_name), "w") as updated_file:
             updated_file.write(contents)
