@@ -20,6 +20,8 @@ The actual problem will be chosen on startup of the applications, and you'll see
 
 ## Architecture
 
+![architecture diagram](architecture-diagram.png)
+
 Because k3s runs with containerd, we can't just run locally built images, so we need to set up a locally running container registry.
 
 Besides that, we'll have a few containers running in the cluster
