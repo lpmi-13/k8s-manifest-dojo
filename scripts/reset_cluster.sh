@@ -1,3 +1,8 @@
+# Check if the manifests copy target directory exists, and if not, create it
+if ! [ -d "./manifests/application" ]; then
+  mkdir ./manifests/application
+fi
+
 # First, tear down anything currently running
 ./scripts/tear_down.sh
 
