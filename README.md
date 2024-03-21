@@ -1,15 +1,22 @@
-# K3s Dojo
+# K8s Dojo
 
-This is a k3s cluster with configuration to present several common scenarios to debug:
+Learning to read and configure kubernetes manifests is an important foundational skill, and so this project will help you get some practice with that. I wanted more practice myself, so I built this to give myself a place to troubleshoot potential typos in the yaml.
 
-- DNS issues
-- Liveness/Readiness probe issues
-- ResourceLimit issues
-- RBAC access to secrets issues
+You'll be presented with a k3s cluster with configuration to present several common scenarios to debug:
 
-The actual problem will be chosen on startup of the applications, and you'll see there's an issue by querying pod status or looking in logs.
+- misconfigured deployment
+- misconfigured ports
+- misconfigured service accounts
+- misconfigured namespaces
+- misconfigured volume constraints
+- misconfigured resource requests and/or limits
+- misconfigured database access
+- misconfigured health checks
+- misconfigured network policies
 
-We may get to the point where there's an actual application that you can see misbehaving, but in this PoC, I think we'll assume there's no production traffic and all the issues will present themselves in the absence of actual load on the system.
+The actual problem will be chosen on startup of the applications, and you'll see there's an issue by querying pod status or looking in container logs. There's also a grafana pod with a few dashboards that might also be helpful.
+
+> NOTE: All of the issues will be with the yaml manifests in the `manifests/application` directory. You won't need to change any application code to fix them.
 
 ## Architecture
 
@@ -39,7 +46,7 @@ Follow the steps [here](https://devops.stackexchange.com/a/16044).
 Once that's all set up, you can run the `setup_cluster.sh` script to get the base configuration running.
 
 ```sh
-./scripts/setup_cluster.sh
+./scripts/full_setup_cluster.sh
 ```
 
 > run this from the root directory of the project
@@ -48,7 +55,7 @@ Once that's all set up, you can run the `setup_cluster.sh` script to get the bas
 
 The cluster will be started with one problem chosen at random, and you'll need to figure out what it is and how to fix it.
 
-> The first place to look is in the spec for the misbehaving service. Since the problem is a misconfigured manifest, that's where you need to fix things. Use the errors to figure out which spec to look in.
+> The first place to look is in the spec for the misbehaving service. Since the problem is a misconfigured manifest, that's where you need to fix things. Use the errors to figure out which spec to look in. You can also check the grafana dashboards for clues.
 
 Potential issues:
 
@@ -59,10 +66,12 @@ Potential issues:
 - misconfigured volume constraints
 - misconfigured resource requests and/or limits
 - misconfigured database access
+- misconfigured health checks
+- misconfigured network policies
 
 > Most of these will probably cause issues with the pods starting up, so it should be fairly obvious that something's wrong, but I'm going to try and have a bunch of variations to keep it spicy
 
-You should be able to visit the grafana dashboard to see if something's up. You can see what IP to use to access the dashboard via:
+You should be able to visit the grafana dashboard to see if something's up. You can see what local IP to use to access the dashboard via:
 
 ```sh
 kubectl -n monitoring get svc
@@ -71,12 +80,13 @@ kubectl -n monitoring get svc
 You'll see something like this:
 
 ```sh
-NAME                 TYPE       CLUSTER-IP     EXTERNAL-IP   PORT(S)          AGE
-prometheus-service   NodePort   10.43.1.191    <none>        8080:30000/TCP   6m47s
-grafana              NodePort   10.43.213.62   <none>        3000:32000/TCP   6m47s
+NAME                 TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)    AGE
+prometheus-service   ClusterIP   10.43.174.175   <none>        8080/TCP   14m
+grafana              ClusterIP   10.43.120.225   <none>        3000/TCP   14m
+node-exporter        ClusterIP   10.43.136.80    <none>        9100/TCP   14m
 ```
 
-And so you can access `http://10.43.213.62:3000` in the browser to go to the dashboard. The default admin username and password, respectively, are "admin" and "admin".
+And so you can access `http://10.43.120.225:3000` in the browser to go to the dashboard. The default admin username and password, respectively, are "admin" and "admin".
 
 ...you can also just see what pods are running via:
 
@@ -84,6 +94,8 @@ And so you can access `http://10.43.213.62:3000` in the browser to go to the das
 kubectl -n dojo get po
 ```
 
-## Resetting the cluster
+Once you've identified the issue and fixed it, you can set up the next issue by running the `scripts/reset_cluster.sh` script. That will pick another misconfiguration at random and redeploy all the services. Follow the same steps from above to troubleshoot and fix it.
+
+## Resetting the cluster from scratch
 
 If, for any reason, you want to reset everything, you can run the k3s "kill all" script at `/usr/local/bin/k3s-killall.sh` (the k3s installer should put it into the `$PATH`). After that, to bring the cluster back up, you can run `sudo systemctl restart k3s`.
