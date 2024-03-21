@@ -1,4 +1,4 @@
-# K8s Dojo
+# K8s Manifest Dojo
 
 Learning to read and configure kubernetes manifests is an important foundational skill, and so this project will help you get some practice with that. I wanted more practice myself, so I built this to give myself a place to troubleshoot potential typos in the yaml.
 
