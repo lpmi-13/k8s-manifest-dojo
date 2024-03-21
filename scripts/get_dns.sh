@@ -2,6 +2,8 @@
 
 # This is shamelessly copied from https://stackoverflow.com/a/69131696
 
+# Might be helpful to run if want to verify what DNS entries are available in the cluster
+
 echo =========== Create an ubuntu pod ==================
 kubectl run ubuntu --image=ubuntu -- bash -c "while true; do echo hello; sleep 10;done"
 

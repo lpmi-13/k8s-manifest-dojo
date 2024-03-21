@@ -55,7 +55,7 @@ Once that's all set up, you can run the `setup_cluster.sh` script to get the bas
 
 The cluster will be started with one problem chosen at random, and you'll need to figure out what it is and how to fix it.
 
-> The first place to look is in the spec for the misbehaving service. Since the problem is a misconfigured manifest, that's where you need to fix things. Use the errors to figure out which spec to look in. You can also check the grafana dashboards for clues.
+> The first place to look is in the spec for the misbehaving service. Since the problem is a misconfigured manifest, that's where you need to fix things. Use the errors to figure out which manifest to look in. You can also check the grafana dashboards for clues.
 
 Potential issues:
 

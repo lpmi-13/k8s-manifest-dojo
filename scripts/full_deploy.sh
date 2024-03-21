@@ -1,3 +1,8 @@
+#! /bin/sh
+
+# this is the full initial setup script, when we want to run all the services in the cluster
+# and also start up the monitoring stack (eg, prometheus/grafana)
+
 if ! [ -d "/tmp/k3s-data" ]; then
   mkdir /tmp/k3s-data
 fi
