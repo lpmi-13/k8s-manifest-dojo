@@ -14,7 +14,7 @@ You'll be presented with a k3s cluster with configuration to present several com
 - misconfigured health checks
 - misconfigured network policies
 
-The actual problem will be chosen on startup of the applications, and you'll see there's an issue by querying pod status or looking in container logs. There's also a grafana pod with a few dashboards that might also be helpful.
+The actual problem will be chosen on startup of the applications, and you'll see there's an issue by querying pod status or looking in container logs. There's also a grafana pod with a few dashboards based on prometheus data that might also be helpful.
 
 > NOTE: All of the issues will be with the yaml manifests in the `manifests/application` directory. You won't need to change any application code to fix them.
 
@@ -43,7 +43,7 @@ error: error loading config file "/etc/rancher/k3s/k3s.yaml": open /etc/rancher/
 
 Follow the steps [here](https://devops.stackexchange.com/a/16044).
 
-Once that's all set up, you can run the `setup_cluster.sh` script to get the base configuration running.
+Once that's all set up, you can run the `full_setup_cluster.sh` script to get the base configuration running.
 
 ```sh
 ./scripts/full_setup_cluster.sh
@@ -53,7 +53,7 @@ Once that's all set up, you can run the `setup_cluster.sh` script to get the bas
 
 ## Entering the Dojo
 
-The cluster will be started with one problem chosen at random, and you'll need to figure out what it is and how to fix it.
+The cluster will be started with one problem chosen at random, and you'll need to figure out what it is and how to fix it. Depending on what the issue is, it might take up to 30 seconds for it to be apparent.
 
 > The first place to look is in the spec for the misbehaving service. Since the problem is a misconfigured manifest, that's where you need to fix things. Use the errors to figure out which manifest to look in. You can also check the grafana dashboards for clues.
 
@@ -94,7 +94,7 @@ And so you can access `http://10.43.120.225:3000` in the browser to go to the da
 kubectl -n dojo get po
 ```
 
-Once you've identified the issue and fixed it, you can set up the next issue by running the `scripts/reset_cluster.sh` script. That will pick another misconfiguration at random and redeploy all the services. Follow the same steps from above to troubleshoot and fix it.
+Once you've identified the issue and fixed it, you can set up the next issue by running the `scripts/next_exercise.sh` script. That will pick another misconfiguration at random and redeploy all the services. Follow the same steps from above to troubleshoot and fix it.
 
 ## Resetting the cluster from scratch
 

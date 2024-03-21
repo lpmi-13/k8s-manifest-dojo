@@ -13,8 +13,8 @@ fi
 ./scripts/build_containers.sh
 
 # Clear out current application manifests and copy the templates back in
-rm -rf "./manifests/application/*"
-cp -r "./manifests/templates/*" "./manifests/application"
+rm -rf manifests/application/*
+cp manifests/templates/* ./manifests/application
 
 # set up the manifests with one broken configuration
 python3 ./scripts/configure.py
