@@ -7,6 +7,10 @@ if ! [ -d "/tmp/k3s-data" ]; then
   mkdir /tmp/k3s-data
 fi
 
+if ! [ -d "/tmp/k3s-database-data" ]; then
+  mkdir /tmp/k3s-database-data
+fi
+
 python3 ./scripts/data_generator.py
 
 # set up the namespace and the roles first
