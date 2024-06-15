@@ -56,7 +56,7 @@ func sendRequest(url string, ch chan string) {
 	res, err := http.Get(fullPath)
 
 	if err != nil {
-	    // Check for connection refused error
+		// Check for connection refused error
 		if netErr, ok := err.(net.Error); ok && netErr.Timeout() {
 			log.Printf("timeout error for URL %s: %v", fullPath, err)
 		} else if opErr, ok := err.(*net.OpError); ok {
