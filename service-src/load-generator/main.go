@@ -4,9 +4,11 @@ import (
 	"fmt"
 	"log"
 	"math/rand"
+	"net"
 	"net/http"
 	"os"
 	"strconv"
+	"syscall"
 	"time"
 )
 
@@ -52,10 +54,23 @@ func sendRequest(url string, ch chan string) {
 	log.Printf("calling: %s", fullPath)
 
 	res, err := http.Get(fullPath)
+
 	if err != nil {
-		log.Fatalln(err)
+	    // Check for connection refused error
+		if netErr, ok := err.(net.Error); ok && netErr.Timeout() {
+			log.Printf("timeout error for URL %s: %v", fullPath, err)
+		} else if opErr, ok := err.(*net.OpError); ok {
+			if sysErr, ok := opErr.Err.(*os.SyscallError); ok && sysErr.Err == syscall.ECONNREFUSED {
+				log.Printf("connection refused for URL %s: %v", fullPath, err)
+			} else {
+				log.Printf("network error for URL %s: %v", fullPath, err)
+			}
+		} else {
+			log.Printf("HTTP error for URL %s: %v", fullPath, err)
+		}
+	} else {
+		log.Printf("received response code %d for URL %s", res.StatusCode, fullPath)
 	}
-	fmt.Println("got status code:", res.StatusCode)
 
 	ch <- url
 }
