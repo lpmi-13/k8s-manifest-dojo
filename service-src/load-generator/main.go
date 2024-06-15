@@ -15,7 +15,7 @@ const NUMBER_OF_USERS = 26
 
 func main() {
 
-    webserver_domain := os.Args[1]
+	webserver_domain := os.Args[1]
 	concurrentExecutions, _ := strconv.Atoi(os.Args[2])
 
 	ch := make(chan string)
@@ -30,20 +30,20 @@ func main() {
 }
 
 func randomURLPath() string {
-  URL_PATHS := []string{
-    "/all_users",
-	fmt.Sprintf("/user/%v", randomUserId()),
-	"/log-info",
-  }
+	URL_PATHS := []string{
+		"/all_users",
+		fmt.Sprintf("/user/%v", randomUserId()),
+		"/log-info",
+	}
 
-  indexToChoose := rand.Intn(3)
-  return URL_PATHS[indexToChoose]
+	indexToChoose := rand.Intn(3)
+	return URL_PATHS[indexToChoose]
 }
 
 func randomUserId() int {
-    min := 1
-    max := NUMBER_OF_USERS
-    return rand.Intn(max) + min
+	min := 1
+	max := NUMBER_OF_USERS
+	return rand.Intn(max) + min
 }
 
 func sendRequest(url string, ch chan string) {
