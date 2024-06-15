@@ -2,11 +2,8 @@ FROM golang:1.22.1-alpine3.19 as builder
 
 WORKDIR /app
 
-COPY go.mod ./
-
-WORKDIR /app
-
-COPY main.go ./
+# this only uses the standard lib, so no need to download dependencies
+COPY go.mod main.go ./
 
 RUN CGO_ENABLED=0 go build -ldflags="-w -s" -o /load-generator
 
